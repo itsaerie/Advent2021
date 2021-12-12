@@ -30,10 +30,17 @@ public class Day"$day" {
         }
         sc.close();
 
+        // long startTime, endTime;
+        // startTime = System.nanoTime();
         int part1 = part1(lines);
         System.out.println(part1);
+        // endTime = System.nanoTime();
+        // System.out.println(\"Pt1 \"+(endTime - startTime) / 1000000000.00+\" seconds\");
+        // startTime = System.nanoTime();
         long part2 = part2(lines);
         System.out.println(part2);
+        // endTime = System.nanoTime();
+        // System.out.println(\"Pt2 \"+(endTime - startTime) / 1000000000.00+\" seconds\");
     }
 }" > $day/Day$day.java
 
