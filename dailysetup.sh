@@ -9,6 +9,8 @@ mkdir $day
 
 touch $day/Day$day.java
 echo "import java.io.*;
+import java.nio.charset.*;
+import java.nio.file.*;
 import java.util.*;
 
 public class Day"$day" {
@@ -20,15 +22,8 @@ public class Day"$day" {
         return 0;
     }
 
-    public static void main(String[] args) throws FileNotFoundException {
-        File f = new File(\""$day"/input.txt\");
-        Scanner sc = new Scanner(f);
-        ArrayList<String> lines = new ArrayList<>();
-        while(sc.hasNextLine()) {
-            String line = sc.nextLine();
-            lines.add(line);
-        }
-        sc.close();
+    public static void main(String[] args) throws IOException {
+        ArrayList<String> lines = new ArrayList<>(Files.readAllLines(new File(\""$day"/input.txt\").toPath(), Charset.defaultCharset()));
 
         // long startTime, endTime;
         // startTime = System.nanoTime();

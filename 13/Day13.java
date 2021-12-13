@@ -1,4 +1,6 @@
 import java.io.*;
+import java.nio.charset.*;
+import java.nio.file.*;
 import java.util.*;
 import java.awt.Point;
 
@@ -12,9 +14,10 @@ public class Day13 {
             // all values with x right of line are folded
             for (Point p : points) {
                 if (p.x > line) {
-                    // System.out.println("folding "+p+" on "+fold+" to "+new Point(line - (p.x - line), p.y));
+                    // System.out.println("folding "+p+" on "+fold+" to "+new Point(line - (p.x -
+                    // line), p.y));
                     newPoints.add(new Point(line - (p.x - line), p.y));
-                } else if(p.x < line){
+                } else if (p.x < line) {
                     // System.out.println("keeping "+p);
                     newPoints.add(new Point(p.x, p.y));
                 }
@@ -24,15 +27,16 @@ public class Day13 {
             // all values with y above line are folded
             for (Point p : points) {
                 if (p.y > line) {
-                    // System.out.println("folding "+p+" on "+fold+" to "+new Point(p.x, line - (p.y - line)));
+                    // System.out.println("folding "+p+" on "+fold+" to "+new Point(p.x, line - (p.y
+                    // - line)));
                     newPoints.add(new Point(p.x, line - (p.y - line)));
-                } else if(p.y < line) {
+                } else if (p.y < line) {
                     // System.out.println("keeping "+p);
                     newPoints.add(new Point(p.x, p.y));
                 }
             }
         }
-        
+
         // System.out.println("new size: "+newPoints.size());
 
         return newPoints;
@@ -40,13 +44,13 @@ public class Day13 {
 
     public static void printGrid(HashSet<Point> points) {
         char[][] grid = new char[6][40];
-        for(char[] line : grid) {
-            Arrays.fill(line,' ');
+        for (char[] line : grid) {
+            Arrays.fill(line, ' ');
         }
-        for(Point p : points) {
+        for (Point p : points) {
             grid[p.y][p.x] = '#';
         }
-        for(char[] line : grid) {
+        for (char[] line : grid) {
             System.out.println(Arrays.toString(line));
         }
     }
@@ -61,21 +65,14 @@ public class Day13 {
     public static void part2(HashSet<Point> points, ArrayList<String> folds) {
         HashSet<Point> newPoints = new HashSet<>();
         newPoints.addAll(points);
-        for(int i=0; i<folds.size(); i++) {
+        for (int i = 0; i < folds.size(); i++) {
             newPoints = fold(newPoints, folds.get(i));
         }
         printGrid(newPoints);
     }
 
-    public static void main(String[] args) throws FileNotFoundException {
-        File f = new File("13/input.txt");
-        Scanner sc = new Scanner(f);
-        ArrayList<String> lines = new ArrayList<>();
-        while (sc.hasNextLine()) {
-            String line = sc.nextLine();
-            lines.add(line);
-        }
-        sc.close();
+    public static void main(String[] args) throws IOException {
+        List<String> lines = Files.readAllLines(new File("13/input.txt").toPath(), Charset.defaultCharset());
 
         // split line into Points and Folds
         HashSet<Point> points = new HashSet<>();
@@ -99,10 +96,10 @@ public class Day13 {
         int part1 = part1(points, folds);
         System.out.println(part1);
         endTime = System.nanoTime();
-        System.out.println("Pt1 "+(endTime - startTime) / 1000000000.00+" seconds");
+        System.out.println("Pt1 " + (endTime - startTime) / 1000000000.00 + " seconds");
         startTime = System.nanoTime();
         part2(points, folds);
         endTime = System.nanoTime();
-        System.out.println("Pt2 "+(endTime - startTime) / 1000000000.00+" seconds");
+        System.out.println("Pt2 " + (endTime - startTime) / 1000000000.00 + " seconds");
     }
 }
