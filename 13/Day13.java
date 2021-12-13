@@ -58,14 +58,13 @@ public class Day13 {
         return newPoints.size();
     }
 
-    public static long part2(HashSet<Point> points, ArrayList<String> folds) {
+    public static void part2(HashSet<Point> points, ArrayList<String> folds) {
         HashSet<Point> newPoints = new HashSet<>();
         newPoints.addAll(points);
         for(int i=0; i<folds.size(); i++) {
             newPoints = fold(newPoints, folds.get(i));
         }
         printGrid(newPoints);
-        return newPoints.size();
     }
 
     public static void main(String[] args) throws FileNotFoundException {
